@@ -1,16 +1,32 @@
+import java.util.Scanner;
+
 public class ShipCostCalculator {
     public static void main(String[] args) {
-        System.out.println("Enter the price of the item: $50");
-        double shippingCost;
-        double price = 50;
-        if (price < 100) {
-            shippingCost = price * 0.02;
-            System.out.println("Shipping cost: $" + shippingCost);
-            System.out.println("Total price: $" + (price + shippingCost));
+        Scanner in = new Scanner(System.in);
+        double itemCost = 0;
+        double shipCost = 0;
+        double totalCost = 0;
+        final double SHIP_RATE = .02;
+        String trash = "";
+
+        System.out.println("Enter the price of the item: ");
+        if (in.hasNextDouble()) {
+            itemCost = in.nextDouble();
+            in.nextLine();
+
+            if (itemCost < 100) {
+                shipCost = itemCost * SHIP_RATE;
+            } else {
+                totalCost = itemCost + shipCost;
+                System.out.println("Your shipping cost is $" + shipCost);
+                System.out.println("Your total cost is $" + totalCost);
+            }
         } else {
-            shippingCost = 0 ;
-            System.out.println("Shipping cost is 0");
-            System.out.println("Total price: $" + price);
+            trash = in.nextLine();
+            System.out.println("Invlaid item Price: " + trash);
+            System.exit(0);
+
         }
     }
-}
+
+
